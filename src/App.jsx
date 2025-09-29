@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import Saludo from './assets/components/Saludo.jsx'
+import JuegoColores from './assets/components/JuegoColores.jsx';
+
 
 function App() {
 
@@ -10,7 +12,8 @@ function App() {
 
   return (
     <>
-     <Saludo nA ={nombre} aA={apellido} edad={edad}></Saludo>
+      <Saludo nA={nombre} aA={apellido} edad={edad}></Saludo>
+      <JuegoColores />
     </>
   )
 }
