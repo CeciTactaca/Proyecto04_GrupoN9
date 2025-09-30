@@ -1,9 +1,9 @@
 function Saludo2 (props){
     return(
      <div>
-      <h1> Hola React </h1>
-      <h2> Soy {props.nA} </h2>
-      <h2>{props.aA}</h2>
+      <h1> Hola </h1>
+      <h2> {props.nA} </h2>
+      <h2>Somos {props.aA}</h2>
       <p>Tengo {props.edad} años</p>
      </div>
     )
