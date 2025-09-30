@@ -1,64 +1,57 @@
-import { useState } from "react";
-import Mensaje from "./components/Mensaje.jsx";
-import Botones from "./components/Botones.jsx";
-import InputNumero from "./components/InputNumero.jsx";
+import React, { useState } from "react";
+import "./styles/game.css";
 
 function App() {
-  const [numeroSecreto] = useState(() => Math.floor(Math.random() * 100) + 1);
-  const [intento, setIntento] = useState("");
-  const [mensaje, setMensaje] = useState("");
+  const [numeroSecreto] = useState(Math.floor(Math.random() * 100) + 1);
   const [intentos, setIntentos] = useState(0);
-  const [juegoTerminado, setJuegoTerminado] = useState(false);
+  const [mensaje, setMensaje] = useState("");
+  const [disabled, setDisabled] = useState(false);
+  const [inputValue, setInputValue] = useState("");
 
   const verificar = () => {
-    if (juegoTerminado) return;
+    const valor = Number(inputValue);
+    setIntentos(intentos + 1);
 
-    const num = parseInt(intento, 10);
-    if (isNaN(num)) {
-      setMensaje("⚠️ Por favor, ingresa un número válido.");
-      return;
-    }
-
-    setIntentos((prev) => prev + 1);
-
-    if (num === numeroSecreto) {
-      setMensaje(
-        `🎉 ¡Acertaste! El número era ${numeroSecreto}. 
-        Cantidad de intentos: ${intentos + 1}`
-      );
-      setJuegoTerminado(true);
-    } else if (num < numeroSecreto) {
-      setMensaje(`El número ${num} es muy bajo`);
+    if (valor === numeroSecreto) {
+      setMensaje(`¡Adivinaste! El número era ${numeroSecreto}. Intento número ${intentos + 1}`);
+      setDisabled(true);
+    } else if (valor > numeroSecreto) {
+      setMensaje(`El número ${valor} es muy alto`);
     } else {
-      setMensaje(`El número ${num} es muy alto`);
+      setMensaje(`El número ${valor} es muy bajo`);
     }
   };
 
   const rendirse = () => {
-    setMensaje(`😢 Te rendiste. El número era ${numeroSecreto}.`);
-    setJuegoTerminado(true);
+    setMensaje(`Te rendiste 😢. El número era ${numeroSecreto}`);
+    setDisabled(true);
   };
 
   return (
-    <div className="container py-5">
-      <div className="card shadow-lg p-4">
-        <h1 className="text-center text-primary mb-3">Adivina el número</h1>
+    <div className="container text-center mt-5">
+      <h1 className="mb-4">Adivina el número</h1>
 
-        {!juegoTerminado && (
-          <>
-            <p className="text-muted text-center">
-              Ingresa un número entre 1 y 100
-            </p>
-            <p className="fw-bold text-center">Intentos: {intentos}</p>
+      <p>Ingresa un número entre 1 y 100</p>
+      <p>Cantidad de intentos: <span>{intentos}</span></p>
 
-            <InputNumero intento={intento} setIntento={setIntento} />
+      <input
+        type="number"
+        className="form-control w-50 mx-auto mb-3"
+        value={inputValue}
+        onChange={(e) => setInputValue(e.target.value)}
+        disabled={disabled}
+      />
 
-            <Botones verificar={verificar} rendirse={rendirse} />
-          </>
-        )}
-
-        <Mensaje mensaje={mensaje} />
+      <div className="d-flex justify-content-center gap-2 mb-3">
+        <button className="btn btn-primary" onClick={verificar} disabled={disabled}>
+          Verificar
+        </button>
+        <button className="btn btn-secondary" onClick={rendirse} disabled={disabled}>
+          Me rindo
+        </button>
       </div>
+
+      <p id="mensaje" className="fw-bold">{mensaje}</p>
     </div>
   );
 }
