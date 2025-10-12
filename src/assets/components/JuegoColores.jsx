@@ -11,7 +11,7 @@ function JuegoColores() {
     //useEffect
     useEffect(() => {
         console.log(contador);
-        setMensaje(`Intentos ${contador}`);
+       // setMensaje(`Intentos ${contador}`);
         const intervalo = setInterval(()=>{
             setSegundos(s => s+1);
         },1000);
@@ -21,6 +21,17 @@ function JuegoColores() {
         }
     }, [contador]);
 
+    const hayColoresRepetidos = (colores) => {
+        const contadorColores = {};
+        for (let color of colores) {
+           contadorColores[color] = (contadorColores[color] || 0) + 1;
+           if (contadorColores[color] >= 3) {
+          return true;
+         }
+        }
+       return false;
+    };
+
     const manejarClick = () => {
         const coloresNuevos = colorDeBotones.map(() => {
             const indiceAleatorio = Math.floor(Math.random() * colores.length);
@@ -29,6 +40,14 @@ function JuegoColores() {
         });
         setColorDeBotones(coloresNuevos);
         setContador(contador+1);
+
+        if (hayColoresRepetidos(coloresNuevos)) {
+            setMensaje('¡Ganaste!');
+            setContador(0);
+        } else {
+            setMensaje(`Intentos ${contador+1}`);
+        }
+
     };
 
     return (
