@@ -43,7 +43,7 @@ function JuegoColores() {
 
         if (hayColoresRepetidos(coloresNuevos)) {
             setMensaje('¡Ganaste!');
-            setContador(0);
+            setContador(1);
         } else {
             setMensaje(`Intentos ${contador+1}`);
         }
