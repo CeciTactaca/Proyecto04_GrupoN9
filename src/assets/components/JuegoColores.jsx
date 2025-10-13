@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
 function JuegoColores() {
+    
     const colores = ['#007bff', '#dc3545', '#29a783', '#1fd71fff', '#81bd', '#6c757d'];
     const [colorDeBotones, setColorDeBotones] = useState(colores.slice(0, 5));
     const [mensaje, setMensaje] = useState('');
@@ -42,24 +43,25 @@ function JuegoColores() {
         setContador(contador+1);
 
         if (hayColoresRepetidos(coloresNuevos)) {
-            setMensaje('¡Ganaste!');
-            setContador(1);
+            setMensaje(`¡Ganaste! Intento N° ${contador+1}`);
+            setContador(0);
         } else {
-            setMensaje(`Intentos ${contador+1}`);
+            setMensaje(`Intento N° ${contador+1}`);
         }
 
     };
 
     return (
-        <div>
-            <h1>Juego de Colores</h1>
+        <div className="container text-center mt-5">
+            <h1 className="mb-4">Juego de Colores</h1>
             <p>Presiona cualquier boton para cambiar los colores. Si dos o mas coinciden, ganas </p>
-            <div>
+            <div className="d-flex justify-content-center gap-2 mb-3">
                 {colorDeBotones.map((c, i) => (
                     <button
+                        className="btn text-nowrap"
                         key={i}
                         onClick={manejarClick}
-                        style={{ backgroundColor: c }}
+                        style={{ backgroundColor: c, borderRadius: '5px', border:'none', color: 'white'}}
                     >
                         Boton {i + 1}
                     </button>
