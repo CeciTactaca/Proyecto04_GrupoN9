@@ -34,7 +34,7 @@ function JuegoColores() {
     };
 
     return (
-        <Stack gap={3} className="col-md-5 mx-auto">
+        <Stack gap={2} className="col-md-5 mx-auto">
             <div class="grid text-center">
             <h1>Juego de Colores</h1>
             <h6>Presiona cualquier boton para cambiar los colores. Si dos o mas coinciden, ganas </h6>
