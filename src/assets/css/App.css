@@ -1,0 +1,17 @@
+body {
+  min-height: 100vh;
+  background: linear-gradient(120deg, #270948, #2b7bd8);
+  color: #333;
+  margin: 0;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+}
+
+.contenedor {
+  background-color: rgba(255, 255, 255, 0.70);
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+
+}
