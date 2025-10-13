@@ -13,7 +13,7 @@ function JuegoColores() {
     //useEffect
     useEffect(() => {
         console.log(contador);
-        setMensaje(`Intentos ${contador}`);
+        //setMensaje(`Intentos ${contador}`);
         const intervalo = setInterval(()=>{
             setSegundos(s => s+1);
         },1000);
@@ -23,6 +23,17 @@ function JuegoColores() {
         }
     }, [contador]);
 
+    const hayColoresRepetidos = (colores) => {
+        const contadorColores = {};
+        for (let color of colores) {
+           contadorColores[color] = (contadorColores[color] || 0) + 1;
+           if (contadorColores[color] >= 3) {
+          return true;
+         }
+        }
+       return false;
+    };
+
     const manejarClick = () => {
         const coloresNuevos = colorDeBotones.map(() => {
             const indiceAleatorio = Math.floor(Math.random() * colores.length);
@@ -31,17 +42,24 @@ function JuegoColores() {
         });
         setColorDeBotones(coloresNuevos);
         setContador(contador+1);
+
+        if (hayColoresRepetidos(coloresNuevos)) {
+            setMensaje(`¡Ganaste! Intento N° ${contador+1}`);
+            setContador(0);
+        } else {
+            setMensaje(`Intento N° ${contador+1}`);
+        }
     };
 
     return (
         <Stack gap={2} className="col-md-5 mx-auto">
             <div class="grid text-center">
             <h1>Juego de Colores</h1>
-            <h6>Presiona cualquier boton para cambiar los colores. Si dos o mas coinciden, ganas </h6>
+            <h6>Presiona cualquier boton para cambiar los colores. Si tres colores coinciden, ganas </h6>
             </div>
             <div className="d-flex gap-2 mb-2">
                 {colorDeBotones.map((c, i) => (
-                    <Button variant="light" 
+                    <Button variant="outline-dark"
                         key={i}
                         onClick={manejarClick}
                         style={{ backgroundColor: c }}
