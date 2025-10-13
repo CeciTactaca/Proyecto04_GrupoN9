@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react';
+import Stack from 'react-bootstrap/Stack';
+import Button from 'react-bootstrap/Button';
 
 function JuegoColores() {
     const colores = ['#007bff', '#ea0b21ff', '#29a783', '#fffb00ff', '#81bd', '#9ed2ffff', '#a2ff00ff', '#ff8800ff'];
@@ -32,23 +34,27 @@ function JuegoColores() {
     };
 
     return (
-        <div>
+        <Stack gap={3} className="col-md-5 mx-auto">
+            <div class="grid text-center">
             <h1>Juego de Colores</h1>
-            <p>Presiona cualquier boton para cambiar los colores. Si dos o mas coinciden, ganas </p>
-            <div>
+            <h6>Presiona cualquier boton para cambiar los colores. Si dos o mas coinciden, ganas </h6>
+            </div>
+            <div className="d-flex gap-2 mb-2">
                 {colorDeBotones.map((c, i) => (
-                    <button
+                    <Button variant="light" 
                         key={i}
                         onClick={manejarClick}
                         style={{ backgroundColor: c }}
                     >
                         Boton {i + 1}
-                    </button>
+                    </Button>
                 ))}
             </div>
+            <div class="grid text-center">
             <h2>{mensaje}</h2>
             <h1>{segundos}</h1>
-        </div>
+            </div>
+        </Stack>
     )
 }
 export default JuegoColores;
