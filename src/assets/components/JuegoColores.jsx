@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
+import Stack from 'react-bootstrap/Stack';
+import Button from 'react-bootstrap/Button';
 
 function JuegoColores() {
-    
-    const colores = ['#007bff', '#dc3545', '#29a783', '#1fd71fff', '#81bd', '#6c757d'];
+    const colores = ['#007bff', '#ea0b21ff', '#29a783', '#fffb00ff', '#81bd', '#9ed2ffff', '#a2ff00ff', '#ff8800ff'];
     const [colorDeBotones, setColorDeBotones] = useState(colores.slice(0, 5));
     const [mensaje, setMensaje] = useState('');
     const [contador, setContador] = useState(0);
@@ -12,7 +13,7 @@ function JuegoColores() {
     //useEffect
     useEffect(() => {
         console.log(contador);
-       // setMensaje(`Intentos ${contador}`);
+        //setMensaje(`Intentos ${contador}`);
         const intervalo = setInterval(()=>{
             setSegundos(s => s+1);
         },1000);
@@ -48,28 +49,30 @@ function JuegoColores() {
         } else {
             setMensaje(`Intento N° ${contador+1}`);
         }
-
     };
 
     return (
-        <div className="container text-center mt-5">
-            <h1 className="mb-4">Juego de Colores</h1>
-            <p>Presiona cualquier boton para cambiar los colores. Si dos o mas coinciden, ganas </p>
-            <div className="d-flex justify-content-center gap-2 mb-3">
+        <Stack gap={2} className="col-md-5 mx-auto">
+            <div class="grid text-center">
+            <h1>Juego de Colores</h1>
+            <h6>Presiona cualquier boton para cambiar los colores. Si tres colores coinciden, ganas </h6>
+            </div>
+            <div className="d-flex gap-2 mb-2">
                 {colorDeBotones.map((c, i) => (
-                    <button
-                        className="btn text-nowrap"
+                    <Button variant="outline-dark"
                         key={i}
                         onClick={manejarClick}
                         style={{ backgroundColor: c, borderRadius: '5px', border:'none', color: 'white'}}
                     >
                         Boton {i + 1}
-                    </button>
+                    </Button>
                 ))}
             </div>
+            <div class="grid text-center">
             <h2>{mensaje}</h2>
             <h1>{segundos}</h1>
-        </div>
+            </div>
+        </Stack>
     )
 }
 export default JuegoColores;
