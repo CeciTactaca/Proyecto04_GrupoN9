@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 function JuegoColores() {
-    const colores = ['#007bff', '#dc3545', '#29a783', '#1fd71fff', '#81bd', '#6c757d'];
+    const colores = ['#007bff', '#ea0b21ff', '#29a783', '#fffb00ff', '#81bd', '#9ed2ffff', '#a2ff00ff', '#ff8800ff'];
     const [colorDeBotones, setColorDeBotones] = useState(colores.slice(0, 5));
     const [mensaje, setMensaje] = useState('');
     const [contador, setContador] = useState(0);
