@@ -62,7 +62,7 @@ function JuegoColores() {
                     <Button variant="outline-dark"
                         key={i}
                         onClick={manejarClick}
-                        style={{ backgroundColor: c }}
+                        style={{ backgroundColor: c, borderRadius: '5px', border:'none', color: 'white'}}
                     >
                         Boton {i + 1}
                     </Button>
