@@ -12,7 +12,6 @@ function JuegoColores() {
 
     //useEffect
     useEffect(() => {
-        console.log(contador);
         //setMensaje(`Intentos ${contador}`);
         const intervalo = setInterval(()=>{
             setSegundos(s => s+1);
@@ -49,26 +48,27 @@ function JuegoColores() {
         } else {
             setMensaje(`Intento N° ${contador+1}`);
         }
+        
     };
 
     return (
-        <Stack gap={2} className="col-md-5 mx-auto">
-            <div class="grid text-center">
+        <Stack gap={2} className="col-md-12 mx-auto">
+            <div className="grid text-center"> 
             <h1>Juego de Colores</h1>
             <h6>Presiona cualquier boton para cambiar los colores. Si tres colores coinciden, ganas </h6>
             </div>
-            <div className="d-flex gap-2 mb-2">
+            <div className="d-flex gap-1 mb-1">
                 {colorDeBotones.map((c, i) => (
-                    <Button variant="outline-dark"
+                    <Button variant="outline-light"
                         key={i}
                         onClick={manejarClick}
-                        style={{ backgroundColor: c, borderRadius: '5px', border:'none', color: 'white'}}
+                        style={{ backgroundColor: c}}
                     >
                         Boton {i + 1}
                     </Button>
                 ))}
             </div>
-            <div class="grid text-center">
+            <div className="grid text-center">
             <h2>{mensaje}</h2>
             <h1>{segundos}</h1>
             </div>
